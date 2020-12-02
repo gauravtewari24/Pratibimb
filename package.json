@@ -1,0 +1,22 @@
+{
+  "name": "pratibimbh",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gauravtewari24/Pratibimb.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gauravtewari24/Pratibimb/issues"
+  },
+  "homepage": "https://github.com/gauravtewari24/Pratibimb#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
