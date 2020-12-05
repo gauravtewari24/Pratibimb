@@ -1,5 +1,5 @@
 /*===== GOOGLE FONTS =====*/
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap");
 
 /*===== VARIABLES CSS =====*/
 :root {
@@ -12,12 +12,12 @@
   --white-color: #fff;
 
   /*===== Fuente y tipografia =====*/
-  --body-font: 'Poppins', sans-serif;
+  --body-font: "Poppins", sans-serif;
   --normal-font-size: 1rem;
   --small-font-size: 0.875rem;
 
-  /*===== z index =====*/
-  --z-fixed: 100;
+  /*===== z index =====
+  --z-fixed: 100;*/
 }
 
 /*===== BASE =====*/
