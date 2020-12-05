@@ -3,6 +3,7 @@
   width: 90% !important;
   height: 480px !important;
   /*position: absolute;*/
+  opacity: 1;
   top: 80px;
   margin-left: 4%;
   margin-bottom: 2%;
@@ -21,8 +22,8 @@
 
 #movement {
   position: absolute;
-  top: 80px !important;
-  left: 100px !important;
+
+  margin: 0 2% 0 4%;
   border: 1px solid red;
   background: rgba(255, 0, 0, 0.3);
 }
