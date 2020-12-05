@@ -3,9 +3,9 @@
 	width: 640px !important;
 	height:  480px !important;
 	position: absolute;
-	top: 80px;
+	top: 20px;
 	opacity: 1;
-	left: 100px;
+	left: 70px;
 	border-radius: 30px;
 	background-color: black;
 }
@@ -13,16 +13,16 @@
 #canvas {
 	position: absolute;
 	opacity: 1;
-	top: 80px;
-	left: 100px !important;
+	top: 20px;
+	left: 70px !important;
 	width: 640px;
 	height:  480px;
 }
 
 #movement {
 	position: absolute;
-	top: 80px !important;
-	left: 100px !important;
+	top: 20px !important;
+	left: 70px !important;
 	border: 1px solid red;
 	background: rgba(255,0,0,0.3);
 }
