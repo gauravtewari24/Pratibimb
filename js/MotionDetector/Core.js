@@ -6,13 +6,13 @@
  * @author         Benjamin Horn
  * @package        MotionDetector
  * @version        -
- * 
+ *
  */
 
 ;(function(App) {
 
 	"use strict";
-	
+
 	/*
 	 * The core motion detector. Does all the work.
 	 *
@@ -32,7 +32,8 @@
 		var currentImage = null;
 		var oldImage = null;
 
-		var topLeft = [Infinity,Infinity];
+		// var topLeft = [Infinity,Infinity];
+		var topLeft = [0,0];
 		var bottomRight = [0,0];
 
 		var raf = (function(){
