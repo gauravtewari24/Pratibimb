@@ -24,6 +24,6 @@
   position: absolute;
 
   margin: 0 2% 0 4%;
-  border: 1px solid red;
-  background: rgba(255, 0, 0, 0.3);
+  border: 1px solid #000066;
+  background: rgba(0,0,153,0.2);
 }
