@@ -1,87 +1,110 @@
-@import url("https://fonts.googleapis.com/css?family=Pacifico");
+@import url('https://fonts.googleapis.com/css?family=Pacifico');
 
-body {
-  margin: 0;
-  padding: 0;
-  font-family: sans-serif;
-  transition: 0.5s;
-  background: white;
+body
+{
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    transition: 0.5s;
+  background-color: #f8f9fc !important;
+    width: 100% ;
 }
 body::-webkit-scrollbar {
-  width: 3px;
+    width: 3px;
 }
-body.night {
-  background: #12192c;
+body.night
+{
+    background: #1d253b !important;
 }
-.toggle {
-  position: fixed;
-  top: 3vh;
-  right: 50px;
-  background: #fff;
-  border: 2px solid #12192c;
-  width: 45px;
-  height: 22px;
-  cursor: pointer;
-  border-radius: 20px;
-  transition: 0.5s;
-  z-index: 3;
+.toggle
+{
+    position: absolute ;
+    top: 3.5vh;
+    right: 200px;
+    background: #f8f9fc;
+    border: 2px solid #1d253b;
+    width: 45px;
+    height: 22px;
+    cursor: pointer;
+    border-radius: 20px;
+    transition: 0.5s;
+    z-index: 3 ;
 }
-.toggle.active {
-  background: #12192c;
-  border: 2px solid #fff;
+.toggle.active
+{
+    background: #1d253b;
+    border: 2px solid #fff;
 }
-.toggle:before {
-  content: "";
-  position: absolute;
-  top: 2px;
-  left: 2px;
-  width: 16px;
-  height: 16px;
-  background: #12192c;
-  border-radius: 50%;
-  transition: 0.5s;
+.toggle:before
+{
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 16px;
+    height: 16px;
+    background: #1d253b;
+    border-radius: 50%;
+    transition: 0.5s;
 }
-.toggle.active:before {
-  left: 27px;
-  background: white;
+.toggle.active:before
+{
+    left: 27px;
+    background: white;
 }
-.content {
-  margin: 100px auto;
-  width: 1000px;
-}
-
-body.night h1 {
-  color: #fff !important;
-}
-
-body.night h3 {
-  color: #fff !important;
+.content
+{
+    margin: 100px auto;
+    width: 1000px;
 }
 
-body.night h2 {
-  color: #fff !important;
+
+body.night  h1
+{
+    color: #fff !important;
 }
 
-body.night h4 {
-  color: #fff !important;
+
+body.night  h3
+{
+    color: #fff !important;
 }
 
-body.night h5 {
-  color: #fff !important;
+
+body.night  h2
+{
+    color: #fff !important;
 }
 
-body.night h6 {
-  color: #fff !important;
+
+body.night  h4
+{
+    color: #fff !important;
 }
 
-body.night p {
-  color: #fff !important;
+
+body.night  h5
+{
+    color: #fff !important;
 }
 
-body.night i {
-  color: #fff !important;
+
+body.night  h6
+{
+    color: #fff !important;
 }
 
-body.night b {
-  color: #fff !important;
+body.night  p
+{
+    color: #fff !important;
+}
+
+body.night  i
+{
+    color: #fff !important;
+}
+
+body.night  b
+{
+    color: #fff !important;
 }

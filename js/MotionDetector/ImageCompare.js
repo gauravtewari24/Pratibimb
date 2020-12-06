@@ -135,6 +135,7 @@
 			if(y < topLeft[1]) {
 				topLeft[1] = [y];
 			}
+				// console.log("TL x ="+x + "y= " + y );
 		}
 
 		/*
@@ -153,6 +154,7 @@
 			if(y > bottomRight[1]) {
 				bottomRight[1] = [y];
 			}
+			// console.log("BR x="+x +"y = " + y);
 		}
 
 		// Initialize on creation.
