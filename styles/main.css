@@ -108,3 +108,8 @@ body.night  b
 {
     color: #fff !important;
 }
+
+.hvr:hover{
+  background-color: #1d253b;
+  color: white;
+}

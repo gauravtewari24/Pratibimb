@@ -1,128 +1,98 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Day Night Toogle</title>
-    <link rel="stylesheet" type="text/css" href="styles/main.css"/>
-    <link rel="stylesheet" type="text/css" href="styles/main-w.css" media="all">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-
-    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-    <script src="js/main0.js" type="text/javascript"></script>
-
-    <!-- ==== CHARTS ==== -->
-    <script src="https://cdn.amcharts.com/lib/4/core.js"></script>
-    <script src="https://cdn.amcharts.com/lib/4/charts.js"></script>
-    <script src="https://cdn.amcharts.com/lib/4/themes/frozen.js"></script>
-    <script src="https://cdn.amcharts.com/lib/4/themes/dataviz.js"></script>
-    <script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>
+	<meta charset="UTF-8">
+	<title>Stopwatch</title>
 </head>
-<body>
-  <!-- NAV BAR  -->
-  <nav  class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
-  <span class="navbar-toggler-icon"></span>
-</button>
-<a class="navbar-brand" href="#">PRATIBIMB</a>
+<body onload="show();">
+	<div>Time: <span id="time"></span></div>
+	<input type="button" value="start" onclick="start();">
+	<input type="button" value="stop" onclick="stop();">
+	<input type="button" value="reset" onclick="reset()">
 
-<div class="collapse navbar-collapse" id="navbarTogglerDemo03">
-  <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-    <li class="nav-item active">
-      <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#">Yogic <span class="sr-only">(current)</span></a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#">MediCon <span class="sr-only">(current)</span></a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#">Healthrifc <span class="sr-only">(current)</span></a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#">About Us <span class="sr-only">(current)</span></a>
-    </li>
-  </ul>
-  <!-- inclding theme word -->
-  <!-- <p class="nav-item my-2 my-lg-0" style="color:white;">Theme</p> -->
-  <div class="toggle">
-  </div>
-  <!-- <form class="nav-item my-2 my-lg-0">
-      <p style="color:white;" class="nav-link" href="#">Theme<span class="sr-only">(current)</span></p>
-  </form> -->
-</div>
-</nav>
+<script type="text/javascript">
+var	clsStopwatch = function() {
+  // Private vars
+  var	startAt	= 0;	// Time of last start / resume. (0 if not running)
+  var	lapTime	= 0;	// Time on the clock when last stopped in milliseconds
 
-<div class="toggle"></div>
-<div class="row " style="margin-top: 45px;">
+  var	now	= function() {
+      return (new Date()).getTime();
+    };
 
+  // Public methods
+  // Start or resume
+  this.start = function() {
+      startAt	= startAt ? startAt : now();
+    };
 
-  <!-- ==== PART 1 ==== -->
-  <div class="col-6">
-    <video id="webCamWindow" autoplay></video>
-    <div id="movement"></div>
+  // Stop or pause
+  this.stop = function() {
+      // If running, update elapsed time otherwise keep it
+      lapTime	= startAt ? lapTime + now() - startAt : lapTime;
+      startAt	= 0; // Paused
+    };
 
-    <div class="col-12   " style="margin-top:600px;">
-      <div class="pl-4">
-        <h3> <i>Why Meditate?</i> </h3>
-      </div>
-      <div class="p-4 ">
-        <p>Meditation can give you a sense of calm, peace and balance that can benefit both your emotional well-being and your overall health. And these benefits don't end when your meditation session ends. Meditation can help carry you more calmly through your day and may help you manage symptoms of certain medical conditions.</p>
-      </div>
-      <div class="p-4 d-flex justify-content-center">
-        <h2>Your Accuracy</h2>
-      </div>
-      </div>
-  </div>
+  // Reset
+  this.reset = function() {
+      lapTime = startAt = 0;
+    };
 
+  // Duration
+  this.time = function() {
+      return lapTime + (startAt ? now() - startAt : 0);
+    };
+};
 
+var x = new clsStopwatch();
+var $time;
+var clocktimer;
 
-  <!-- ==== PART @ ==== -->
-  <div class="col-6">
-    <div class="d-flex justify-content-center pt-4">
-      <h1 class="pt-4">Choose the perfect one for you!</h1>
-    </div>
-    <div class="con-videos" >
-      <div class="d-flex justify-content-center p-4">
-          <iframe style="border-radius:25px;" width="560" height="315" src="https://www.youtube.com/embed/inpok4MKVLM" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-      </div>
-      <div class="d-flex justify-content-center p-4">
-        <iframe style="border-radius:25px;" width="560" height="315" src="https://www.youtube.com/embed/Nj4BpkGh74o" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-      </div>
-      <div class="d-flex justify-content-center p-4">
-      <iframe style="border-radius:25px;" width="560" height="315" src="https://www.youtube.com/embed/d4S4twjeWTs" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>    </div>
-    </div>
-  </div>
-</div>
+function pad(num, size) {
+var s = "0000" + num;
+return s.substr(s.length - size);
+}
 
-<!-- ==== FOOTER STARTS ==== -->
-<footer class="navbar-dark bg-dark p-4" style="z-index:4">
-  <div style="color:white;" class="d-flex justify-content-center">
-     <i>Designed with ❤️ by Team Pratibimb</i>
-  </div>
-  <div class="d-flex justify-content-center" style="margin-top:10px;">
-     <i style="font-size: 20px; color:white;"class="	fa fa-github"></i> &nbsp  &nbsp  &nbsp  &nbsp
-     <i style="font-size: 20px; color:white;"class="fa fa-instagram"></i> &nbsp  &nbsp  &nbsp  &nbsp
-     <i style="font-size: 20px; color:white;"class="	fa fa-linkedin"></i> &nbsp  &nbsp  &nbsp  &nbsp
-     <i style="font-size: 20px; color:white;"class="	fa fa-facebook"></i>
-  </div>
-</footer>
-<!-- ==== FOOTER END ==== -->
+function formatTime(time) {
+var h = m = s = ms = 0;
+var newTime = '';
 
+h = Math.floor( time / (60 * 60 * 1000) );
+time = time % (60 * 60 * 1000);
+m = Math.floor( time / (60 * 1000) );
+time = time % (60 * 1000);
+s = Math.floor( time / 1000 );
+ms = time % 1000;
 
-<script type="text/javascript" src="js/global.js"></script>
-<script type="text/javascript" src="js/MotionDetector/WebCamCapture.js"></script>
-<script type="text/javascript" src="js/MotionDetector/ImageCompare.js"></script>
-<script type="text/javascript" src="js/MotionDetector/Core.js"></script>
-<script type="text/javascript" src="js/main.js"></script>
-<!-- Optional JavaScript -->
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.js"></script>
-      <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-      <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh5AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+newTime = pad(h, 2) + ':' + pad(m, 2) + ':' + pad(s, 2) + ':' + pad(ms, 3);
+return newTime;
+}
+
+function show() {
+$time = document.getElementById('time');
+update();
+}
+
+function update() {
+$time.innerHTML = formatTime(x.time());
+}
+
+function start() {
+clocktimer = setInterval("update()", 1);
+x.start();
+}
+
+function stop() {
+x.stop();
+clearInterval(clocktimer);
+}
+
+function reset() {
+stop();
+x.reset();
+update();
+}
+</script>
 
 
 </body>

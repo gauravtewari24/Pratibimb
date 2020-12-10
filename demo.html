@@ -30,11 +30,16 @@
         .nav-link:hover{
             background-color: rgb(31, 52, 85);
         }
-
+        #chartdiv1{
+          display:  none;
+        }
+        #chartdiv2{
+          display:  none;
+        }
     </style>
 </head>
 
-<body >
+<body onload="show();" >
 
   <!-- ==== Side Bar ==== -->
     <div id="wrapper">
@@ -91,20 +96,26 @@
 
 <!-- ==== Theme Toggler -->
             <div class="toggle"></div>
-
-
-
 <!-- ==== CONTENT ==== -->
           <div class="row " style="margin-top: 45px;">
-
-
                 <!-- ==== PART 1 ==== -->
                 <div class="col-6" >
-                  <video id="webCamWindow" autoplay></video>
-                  <div id="movement"></div>
+                  <div class="col-12">
+                    <video id="webCamWindow" autoplay></video>
+                    <div id="movement"></div>
+                  </div>
 
                   <div class="col-12   " >
-                    <div class="pl-4">
+                    <div class="d-flex justify-content-center">
+                      <h5><i>Time:</i> <span id="time"></span></h5>
+
+                    </div>
+                    <div class="d-flex justify-content-center pl-4 pr-4">
+                      <input class="col-4 form-control hvr"type="button" value="start" onclick="start();">
+                    	<input class="col-4 form-control hvr"type="button" value="stop" onclick="stop();">
+                    	<input class="col-4 form-control hvr"type="button" value="reset" onclick="reset()">
+                    </div>
+                    <div class="pl-4 pt-4">
                       <h3> <i>Why Meditate?</i> </h3>
                     </div>
                     <div class="p-4 ">
@@ -116,8 +127,18 @@
                     <div class="">
                        <div style="width: 100%; height:50vh;" id="chartdiv1"></div>
                     </div>
+                    <div class="">
+                       <div style="width: 100%; height:50vh;" id="chartdiv2"></div>
                     </div>
-                </div>
+                    <div class="">
+                       <div  id="start"></div>
+                    </div>
+                    <div class="">
+                       <div id="stop"></div>
+                    </div>
+                    </div>
+                  </div>
+
 
 
 
@@ -174,5 +195,100 @@
           <script src="assets/js/bs-init.js"></script>
           <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
           <script src="assets/js/theme.js"></script>
+
+          <script type="text/javascript">
+          var	clsStopwatch = function() {
+            // Private vars
+            var	startAt	= 0;	// Time of last start / resume. (0 if not running)
+            var	lapTime	= 0;	// Time on the clock when last stopped in milliseconds
+
+            var	now	= function() {
+                return (new Date()).getTime();
+              };
+
+            // Public methods
+            // Start or resume
+            this.start = function() {
+                startAt	= startAt ? startAt : now();
+              };
+
+            // Stop or pause
+            this.stop = function() {
+                // If running, update elapsed time otherwise keep it
+                lapTime	= startAt ? lapTime + now() - startAt : lapTime;
+                startAt	= 0; // Paused
+              };
+
+            // Reset
+            this.reset = function() {
+                lapTime = startAt = 0;
+              };
+
+            // Duration
+            this.time = function() {
+                return lapTime + (startAt ? now() - startAt : 0);
+              };
+          };
+
+          var x = new clsStopwatch();
+          var $time;
+          var clocktimer;
+
+          function pad(num, size) {
+          var s = "0000" + num;
+          return s.substr(s.length - size);
+          }
+
+          function formatTime(time) {
+          var h = m = s = ms = 0;
+          var newTime = '';
+
+          h = Math.floor( time / (60 * 60 * 1000) );
+          time = time % (60 * 60 * 1000);
+          m = Math.floor( time / (60 * 1000) );
+          time = time % (60 * 1000);
+          s = Math.floor( time / 1000 );
+          ms = time % 1000;
+
+          newTime = pad(h, 2) + ':' + pad(m, 2) + ':' + pad(s, 2) + ':' + pad(ms, 3);
+          return newTime;
+          }
+
+          function show() {
+          $time = document.getElementById('time');
+          update();
+          }
+
+          function update() {
+          $time.innerHTML = formatTime(x.time());
+          }
+
+          function start() {
+            var startChart = document.getElementById("chartdiv1");
+            startChart.style.display="block";
+            var finishChart = document.getElementById("chartdiv2");
+            finishChart.style.display="none";
+
+          clocktimer = setInterval("update()", 1);
+          x.start();
+          }
+
+          function stop() {
+            var startChart = document.getElementById("chartdiv1");
+            startChart.style.display="none";
+            var finishChart = document.getElementById("chartdiv2");
+            finishChart.style.display="block";
+          x.stop();
+          clearInterval(clocktimer);
+          }
+
+          function reset() {
+          stop();
+          x.reset();
+          update();
+          }
+          </script>
+
+
 </body>
 </html>
