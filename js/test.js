@@ -1,8 +1,10 @@
+var c=0;
+
 function timer() {
     var z = document.getElementById("timer");
 
 
-var countDownDate = 15;
+var countDownDate = 10 ;
 var now = 0;
 // Update the count down every 1 second
 var x = setInterval(function() {
@@ -25,12 +27,46 @@ var x = setInterval(function() {
   // If the count down is finished, write some text
   if (distance < 0) {
     clearInterval(x);
-    document.getElementById("demo").innerHTML = "Finsished";
-    var topchart=document.getElementById("chartdiv4");
-        topchart.style.display = "none";
+   // var demo=document.getElementById("demo");
+    //var topchart=document.getElementById("chartdiv4");
+      //  topchart.style.display = "none";
+      var elmnt = document.getElementById("demo");
+    elmnt.remove();
         var y= document.getElementById("timer");
        
-        y.style.top="50%";
+        //y.style.top="50%";
+        var a = document.createElement('a');  
+                  a.style.color="white";
+        // Create the text node for anchor element. 
+        var link = document.createTextNode("Analysis Report"); 
+          
+        // Append the text node to anchor element. 
+        a.appendChild(link);  
+          
+        // Set the title. 
+        a.title = "Analysis Report";  
+          
+        // Set the href property. 
+        a.href = "https://www.geeksforgeeks.org"; 
+
+        var btn = document.getElementById("bt");
+        btn.style.display = "block";
+          y.style.color="white";
+          y.style.display="none";
+        // Append the anchor element to the body. 
+        btn.appendChild(a); 
+        btn.style.marginLeft="40%"
+        var x = document.getElementById("hideit");
+        x.style.display = "block"; 
+        const can = document.getElementById("can");
+        can.style.display="none";
+        const bar = document.getElementById("bar");
+        bar.style.display="none";
+        canvas.width = 0; canvas.height = 0;
+        var hide = document.getElementById("hide");
+        hide.innerHTML="Your Accuracy:"+"   "+"78%";
+        const acc = document.getElementById("acc");
+        acc.style.display="none";
   }
 }, 1000);
 
@@ -54,7 +90,7 @@ var x = setInterval(function() {
         maxPredictions = model.getTotalClasses();
 
         // Convenience function to setup a webcam
-        const size = 600;
+        const size = 570;
         const flip = true; // whether to flip the webcam
         webcam = new tmPose.Webcam(size, size, flip); // width, height, flip
         await webcam.setup(); // request access to the webcam
@@ -63,15 +99,19 @@ var x = setInterval(function() {
 
         // append/get elements to th e DOM
         const canvas = document.getElementById("canvas");
-        canvas.width = 600; canvas.height = size;
+        canvas.width = 680; canvas.height = size;
         ctx = canvas.getContext("2d");
         var x = document.getElementById("hideit");
         x.style.display = "none";
        var y= document.getElementById("timer");
         y.style.display = "block";
-        y.style.top="70%";
-        var topchart=document.getElementById("chartdiv4");
-        topchart.style.display = "block";
+        var bar= document.getElementById("bar");
+        bar.style.display = "block";
+        var acc= document.getElementById("acc");
+        acc.style.display = "block";
+      
+       // var topchart=document.getElementById("chartdiv4");
+       // topchart.style.display = "block";
         timer();
         labelContainer = document.getElementById("label-container");
         for (let i = 0; i < maxPredictions; i++) { // and class labels
@@ -94,9 +134,31 @@ var x = setInterval(function() {
         const prediction = await model.predict(posenetOutput);
 
         for (let i = 0; i < maxPredictions; i++) {
+          c++;
             const classPrediction =
-                prediction[i].className + ": " + prediction[i].probability.toFixed(2);
-            labelContainer.childNodes[i].innerHTML = classPrediction;
+                prediction[0].className + ": " + prediction[i].probability.toFixed(2);
+                 var skill= document.getElementById("skill");
+                var val=parseFloat(prediction[i].probability.toFixed(2));
+                //console.log(val+" "+typeof(val));
+                var pose1= document.getElementById("pose1");
+                if(c%8==0)
+                {
+                  var a=(val*100)+"%";
+                  skill.style.width=a;
+                  skill.innerHTML=a;
+                if(val<0.70){
+                  
+                  skill.style.backgroundColor="Red";
+                }
+                else if(val>=0.70)
+                {
+                  
+                  skill.style.backgroundColor="Green";
+                } 
+                }
+                
+               
+           // labelContainer.childNodes[i].innerHTML = classPrediction;
         }
 
         // finally draw the poses
